@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>That Government Smell | Half-Hour Sitcom | Raheem Cash</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:           #faf8f2;
+    --bg-alt:       #f2efe6;
+    --bg-card:      #ffffff;
+    --text:         #1c1a14;
+    --text-mid:     #4a4538;
+    --text-dim:     #8c8578;
+    --green:        #1f3a5f;
+    --green-light:  #d9e2ef;
+    --green-mid:    #2f5484;
+    --yellow:       #e9c46a;
+    --yellow-light: #faf0d2;
+    --yellow-dark:  #8a6a1e;
+    --coral:        #b33a3a;
+    --coral-light:  #f6e0e0;
+    --border:       #ddd9ce;
+    --border-dark:  #b8b2a4;
+    --white:        #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 19px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ───────────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 48px;
+    background: rgba(250,248,242,0.94);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px; font-weight: 900;
+    color: var(--green); letter-spacing: 0.04em;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex; gap: 32px; list-style: none;
+  }
+  .nav-links a {
+    font-family: 'Courier Prime', monospace;
+    font-size: 12px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text-mid);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--green); }
+
+  /* ─── HERO ───────────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+    padding: 120px 72px 80px;
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse 60% 50% at 15% 65%, rgba(31,58,95,0.07) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 40% at 85% 25%, rgba(245,197,24,0.10) 0%, transparent 60%),
+      var(--bg);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(31,58,95,0.04) 60px),
+      repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(31,58,95,0.04) 60px);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    font-family: 'Courier Prime', monospace;
+    font-size: 11px; letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--green);
+    border: 1px solid var(--green-light);
+    background: var(--green-light);
+    display: inline-block;
+    padding: 6px 16px;
+    margin-bottom: 32px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(96px, 14vw, 180px);
+    font-weight: 900; line-height: 0.88;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    animation: fadeUp 0.9s 0.1s ease both;
+    position: relative;
+  }
+
+  .hero-title span.amp {
+    color: var(--coral);
+    font-style: italic;
+  }
+
+  .hero-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 2.5vw, 28px);
+    font-style: italic; font-weight: 400;
+    color: var(--text-mid);
+    margin-top: 20px;
+    max-width: 680px;
+    animation: fadeUp 1s 0.2s ease both;
+    line-height: 1.4;
+  }
+
+  .hero-meta {
+    display: flex; align-items: center; gap: 16px;
+    margin-top: 48px;
+    flex-wrap: wrap;
+    animation: fadeUp 1s 0.3s ease both;
+  }
+  .meta-pill {
+    font-family: 'Courier Prime', monospace;
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 8px 20px;
+    border: 1px solid var(--border-dark);
+    color: var(--text-mid);
+    background: var(--white);
+  }
+  .meta-pill.hot {
+    background: var(--yellow); color: var(--text);
+    border-color: var(--yellow); font-weight: 700;
+  }
+
+  .hero-scroll {
+    position: absolute; right: 72px; bottom: 80px;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    animation: fadeUp 1s 0.5s ease both;
+  }
+  .hero-scroll span {
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--text-dim); writing-mode: vertical-rl;
+  }
+  .scroll-line {
+    width: 1px; height: 60px;
+    background: linear-gradient(to bottom, var(--border-dark), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  /* ─── SECTIONS ───────────────────────────────────── */
+  section { padding: 100px 72px; }
+
+  .section-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 20px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 0 0 40px; height: 1px;
+    background: var(--green-light);
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(38px, 5vw, 64px);
+    font-weight: 700; line-height: 1.05;
+    color: var(--text); margin-bottom: 40px;
+  }
+
+  /* ─── LOGLINE ────────────────────────────────────── */
+  .logline-section {
+    background: var(--bg-alt);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logline-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+    align-items: start;
+  }
+
+  .logline-quote {
+    font-size: clamp(22px, 3vw, 34px);
+    font-style: italic; line-height: 1.45;
+    color: var(--text);
+    border-left: 3px solid var(--coral);
+    padding-left: 32px;
+  }
+  .logline-quote em { color: var(--coral); font-style: normal; }
+
+  .logline-body {
+    font-size: 18px; color: var(--text-mid);
+    line-height: 1.8;
+  }
+  .logline-body p + p { margin-top: 20px; }
+  .logline-body strong { color: var(--text); font-style: italic; font-weight: 400; }
+
+  /* ─── CAST ───────────────────────────────────────── */
+  .cast-section { background: var(--bg); }
+
+  .cast-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-top: 60px;
+  }
+
+  .cast-card {
+    padding: 32px 28px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.25s, border-color 0.25s;
+  }
+  .cast-card:hover {
+    box-shadow: 0 6px 24px rgba(31,58,95,0.10);
+    border-color: var(--green-light);
+  }
+  .cast-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--yellow);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.35s ease;
+  }
+  .cast-card:hover::before { transform: scaleX(1); }
+
+  .cast-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 21px; font-weight: 700;
+    color: var(--text); margin-bottom: 4px;
+  }
+  .cast-meta {
+    font-family: 'Courier Prime', monospace;
+    font-size: 11px; letter-spacing: 0.12em;
+    color: var(--green); text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .cast-bio { font-size: 16px; color: var(--text-mid); line-height: 1.7; }
+
+  .cast-wishlist {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--border);
+    display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
+  }
+  .wishlist-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--text-dim); white-space: nowrap;
+  }
+  .wishlist-names {
+    font-family: 'Playfair Display', serif;
+    font-style: italic; font-size: 14px;
+    color: var(--coral);
+  }
+  .cast-disclaimer {
+    font-family: 'Courier Prime', monospace;
+    font-size: 11px; letter-spacing: 0.05em;
+    color: var(--text-dim); line-height: 1.7;
+    padding: 14px 20px;
+    border: 1px solid var(--border);
+    background: var(--bg-alt);
+    margin-bottom: 40px;
+    max-width: 680px;
+  }
+
+  .cast-role-badge {
+    display: inline-block;
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px; letter-spacing: 0.12em;
+    text-transform: uppercase; padding: 4px 12px;
+    border-radius: 2px;
+    margin-bottom: 16px;
+    background: var(--green-light); color: var(--green);
+  }
+  .cast-role-badge.lead {
+    background: var(--yellow-light); color: var(--yellow-dark);
+  }
+
+  /* ─── EPISODES ───────────────────────────────────── */
+  .episodes-section {
+    background: var(--bg-alt);
+    border-top: 1px solid var(--border);
+  }
+
+  .ep-list { margin-top: 60px; }
+
+  .ep-item {
+    display: grid;
+    grid-template-columns: 60px 200px 1fr;
+    gap: 32px; align-items: start;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border);
+    transition: padding-left 0.2s;
+    cursor: default;
+  }
+  .ep-item:first-child { border-top: 1px solid var(--border); }
+  .ep-item:hover { padding-left: 12px; border-bottom-color: var(--green); }
+
+  .ep-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px; font-weight: 900; line-height: 1;
+    color: var(--border-dark); text-align: right;
+    padding-top: 4px;
+  }
+  .ep-title-block { padding-top: 6px; }
+  .ep-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 700;
+    color: var(--text); margin-bottom: 6px;
+  }
+  .ep-tag {
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--green);
+  }
+  .ep-desc { font-size: 16px; color: var(--text-mid); line-height: 1.75; }
+
+  /* ─── ABOUT SHOWS ─────────────────────────────────── */
+  .shows-section { background: var(--bg); }
+
+  .shows-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px; margin-top: 60px;
+  }
+  .show-card {
+    padding: 32px 28px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    position: relative;
+  }
+  .show-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; font-style: italic; font-weight: 700;
+    color: var(--text); margin-bottom: 12px;
+  }
+  .show-card-body { font-size: 15px; color: var(--text-mid); line-height: 1.7; }
+  .show-card-tag {
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--coral);
+    margin-bottom: 12px; display: block;
+  }
+
+  /* ─── CREATOR ─────────────────────────────────────── */
+  .creator-section {
+    background: var(--bg-alt);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .creator-inner {
+    display: grid; grid-template-columns: 2fr 3fr; gap: 80px;
+    align-items: start;
+  }
+
+  .creator-monogram {
+    width: 120px; height: 120px;
+    background: var(--yellow);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 24px;
+  }
+  .creator-monogram span {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px; font-weight: 900;
+    color: var(--text);
+  }
+
+  .creator-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px; font-weight: 900; line-height: 1.1;
+    color: var(--text); margin-bottom: 8px;
+  }
+  .creator-role {
+    font-family: 'Courier Prime', monospace;
+    font-size: 12px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--green);
+    margin-bottom: 32px;
+  }
+
+  .creator-body { font-size: 18px; line-height: 1.8; color: var(--text-mid); }
+  .creator-body p + p { margin-top: 20px; }
+  .creator-body em { color: var(--text); font-style: italic; }
+
+  .contact-block {
+    margin-top: 40px;
+    padding: 28px 32px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+  .contact-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 16px;
+  }
+  .contact-item {
+    font-size: 17px; color: var(--text-mid);
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 10px;
+  }
+  .contact-item a { color: var(--green); text-decoration: none; }
+  .contact-item a:hover { text-decoration: underline; }
+
+  /* ─── CTA ────────────────────────────────────────── */
+  .cta-section {
+    background: var(--green);
+    text-align: center;
+    padding: 120px 72px;
+  }
+
+  .cta-kicker {
+    font-family: 'Courier Prime', monospace;
+    font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--green-light); margin-bottom: 24px;
+  }
+
+  .cta-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 900; line-height: 1.05;
+    color: #ffffff; margin-bottom: 32px;
+    max-width: 700px; margin-left: auto; margin-right: auto;
+  }
+  .cta-headline em { color: var(--yellow); font-style: italic; }
+
+  .cta-sub {
+    font-size: 20px; color: rgba(255,255,255,0.75); max-width: 560px;
+    margin: 0 auto 48px; line-height: 1.7;
+  }
+
+  .cta-buttons {
+    display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;
+  }
+  .btn-primary {
+    font-family: 'Courier Prime', monospace;
+    font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 18px 44px;
+    background: var(--yellow); color: var(--text);
+    border: 2px solid var(--yellow);
+    text-decoration: none; font-weight: 700;
+    transition: background 0.2s, color 0.2s;
+  }
+  .btn-primary:hover { background: transparent; color: var(--yellow); }
+  .btn-secondary {
+    font-family: 'Courier Prime', monospace;
+    font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 18px 44px;
+    background: transparent; color: rgba(255,255,255,0.7);
+    border: 2px solid rgba(255,255,255,0.3);
+    text-decoration: none; font-weight: 400;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-secondary:hover { border-color: #fff; color: #fff; }
+
+  /* ─── FOOTER ─────────────────────────────────────── */
+  footer {
+    background: var(--bg-alt);
+    border-top: 1px solid var(--border);
+    padding: 40px 72px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 20px;
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 900; color: var(--green);
+  }
+  .footer-copy {
+    font-family: 'Courier Prime', monospace;
+    font-size: 11px; letter-spacing: 0.1em; color: var(--text-dim);
+  }
+
+  /* ─── DIVIDER ─────────────────────────────────────── */
+  .gold-rule {
+    display: flex; align-items: center; gap: 20px;
+    max-width: 200px;
+    margin-bottom: 60px;
+  }
+  .gold-rule::before, .gold-rule::after {
+    content: '';
+    flex: 1; height: 1px; background: var(--border);
+  }
+  .gold-rule-diamond {
+    width: 6px; height: 6px;
+    background: var(--yellow); transform: rotate(45deg);
+  }
+
+  /* ─── RATING BLOCK ────────────────────────────────── */
+  .rating-block {
+    display: inline-flex; align-items: baseline; gap: 8px;
+    padding: 14px 24px;
+    border: 1px solid var(--border);
+    background: var(--white);
+    margin-right: 16px; margin-bottom: 16px;
+    border-radius: 4px;
+  }
+  .rating-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px; font-weight: 900; color: var(--coral); line-height: 1;
+  }
+  .rating-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  /* ─── ANIMATIONS ──────────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; }
+    50%       { opacity: 1; }
+  }
+
+  /* ─── RESPONSIVE ──────────────────────────────────── */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    section, .hero { padding: 80px 24px; }
+    .hero { padding-top: 120px; padding-bottom: 60px; }
+    .logline-grid,
+    .creator-inner { grid-template-columns: 1fr; gap: 40px; }
+    .shows-grid { grid-template-columns: 1fr; }
+    .ep-item { grid-template-columns: 40px 1fr; gap: 16px; }
+    .ep-title-block { grid-column: 2; }
+    .ep-desc { grid-column: 1 / -1; margin-top: -8px; }
+    footer { flex-direction: column; align-items: flex-start; padding: 32px 24px; }
+    .hero-scroll { display: none; }
+    .cta-section { padding: 80px 24px; }
+  }
+
+  /* ─── LAURELS ─────────────────────────────────────── */
+  .hero-laurels {
+    display: none;
+    margin-top: 36px;
+    display: flex; align-items: flex-start; gap: 24px;
+    flex-wrap: wrap;
+    animation: fadeUp 1s 0.4s ease both;
+  }
+  .laurel-item {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    width: 130px;
+  }
+  .laurel-item img {
+    width: 130px; height: 90px;
+    object-fit: contain;
+    display: block;
+  }
+  .laurel-caption {
+    font-family: 'Courier Prime', monospace;
+    font-size: 9.5px; letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    text-align: center;
+    line-height: 1.5;
+  }
+  @media (max-width: 600px) {
+    .hero-laurels { gap: 16px; }
+    .laurel-item, .laurel-item img { width: 110px; }
+    .laurel-item img { height: 75px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">TGS</a>
+  <ul class="nav-links">
+    <li><a href="#premise">Premise</a></li>
+    <li><a href="#cast">Cast</a></li>
+    <li><a href="#episodes">Episodes</a></li>
+    <li><a href="#creator">Creator</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-badge">Half-Hour Sitcom &nbsp;·&nbsp; Written by Raheem Cash</div>
+    <h1 class="hero-title" style="font-size: clamp(56px, 8vw, 110px);">That<br>Government<br><span class="amp">Smell</span></h1>
+    <p class="hero-subtitle">"The Office set in Kafka's Castle": a brilliant young consultant joins the federal government to fix it. The federal government has other plans.</p>
+    <div class="hero-meta">
+      <span class="meta-pill hot">Pilot Written</span>
+      <span class="meta-pill">Half-Hour Comedy</span>
+      <span class="meta-pill">12 Episodes Developed</span>
+      <span class="meta-pill">Based on the Novella</span>
+    </div>
+    <div class="hero-laurels"></div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- LOGLINE / PREMISE -->
+<section class="logline-section" id="premise">
+  <div class="section-label">The Premise</div>
+  <div class="logline-grid">
+    <div>
+      <blockquote class="logline-quote">
+        Rajiv Khashi, a rising star at a top consulting firm, quits to join the federal government. He believes he can make it work better. Uncle Sam, who has run Washington for 241 years, disagrees.
+      </blockquote>
+      <div style="margin-top:40px;">
+        <div class="rating-block">
+          <span class="rating-num">12</span>
+          <span class="rating-label">Episodes<br>Season 1</span>
+        </div>
+        <div class="rating-block">
+          <span class="rating-num">30</span>
+          <span class="rating-label">Minutes<br>Format</span>
+        </div>
+      </div>
+    </div>
+    <div class="logline-body">
+      <p><em>That Government Smell</em> is an absurdist workplace comedy set inside the Agency, a federal entity in Washington, D.C. whose purpose is never quite clear. Think <strong>The Office</strong>, if the office were designed by Kafka and nobody could be fired.</p>
+      <p>Rajiv is a liberal who believes government should do big things. He just thinks it needs more people like him on the inside. What he finds is an admin assistant who won't order recycled paper because "this ain't Whole Foods," a Typist who can't type and makes $80,000 a year, a boss who makes personnel decisions with a fraternity hazing manual, and a union crew that shows up at his door because he plugged in his own computer.</p>
+      <p>Every new federal employee passes through five stages: Shock, Anger, Bargaining, Depression, and Acceptance. Rajiv refuses to accept. Uncle Sam, who appears to him at urinals, in hallways, and in his boss's chair, is determined to make him.</p>
+      <p><strong>Welcome to the government, where getting nothing done is harder than you think.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- CAST -->
+<section class="cast-section" id="cast">
+  <div class="section-label">The Cast</div>
+  <h2 class="section-title">Characters</h2>
+
+  <div class="cast-grid">
+
+    <div class="cast-card">
+      <span class="cast-role-badge lead">Series Lead</span>
+      <div class="cast-name">Rajiv Khashi</div>
+      <div class="cast-meta">34 · Division Director · Former Consultant</div>
+      <div class="cast-bio">Smart, well-dressed, and slightly cocky, Rajiv left a prestigious consulting firm because he believed government could work if the right people showed up. He is the only Director bothering to write a Strategic Plan. He also whacked a colleague with a casino dice stick to win office space for his staff, and he's not proud of it. His hallucinations of a menacing Uncle Sam are not helping.</div>
+    </div>
+
+    <div class="cast-card">
+      <span class="cast-role-badge">Series Regular</span>
+      <div class="cast-name">Darcy Stavros</div>
+      <div class="cast-meta">29 · Rajiv's Staff · Chicago Greek</div>
+      <div class="cast-bio">Smart, spunky, and the only person at the Agency who gets Rajiv's jokes. Darcy joined government to do good and found what she calls the Walking Fed instead. She's Sancho Panza to Rajiv's Quixote, whether he wants one or not. Her mother has set up a Seeking Greek dating profile on her behalf. A man named Oedipus has already called.</div>
+    </div>
+
+    <div class="cast-card">
+      <span class="cast-role-badge">Series Regular</span>
+      <div class="cast-name">Monique Davis</div>
+      <div class="cast-meta">48 (looks 30) · Rajiv's Staff · Force of Nature</div>
+      <div class="cast-bio">Former Army performer, dancer's body, thirty years in government, takes no shit from anyone at any rank. Monique is very good at her job and wants to be left alone to do it. Her plants surround her cubicle like a hedge. She may be the only person in the building Commissioner Franco is afraid of. She will follow Earth, Wind & Fire on tour whenever her leave balance allows.</div>
+    </div>
+
+    <div class="cast-card">
+      <span class="cast-role-badge">Series Regular</span>
+      <div class="cast-name">Dave Ketchner</div>
+      <div class="cast-meta">55 · Rajiv's Staff · "Engineer"</div>
+      <div class="cast-bio">Tall, big-gutted, knows everything, and sighs loudly outside your door until you notice. Dave claims not to care about window offices while photocopying the floor plans. He is a railroad engineer at an agency with no trains, a fact only Monique knows. He spends half his time annoying Rajiv and the other half plotting with Aaron.</div>
+    </div>
+
+    <div class="cast-card">
+      <span class="cast-role-badge">Series Regular</span>
+      <div class="cast-name">Aaron Brand</div>
+      <div class="cast-meta">47 · Rajiv's Staff · Dress Slacks, Sneakers</div>
+      <div class="cast-bio">A lifer who believes he is exceptional and is owed exceptional treatment. His current campaign: adding the word "Experts" to his department's name. Rajiv has said no twice. Aaron has already taped it to his door. Filing grievances is a sport for him, and he's been trying for a year to show Darcy the ropes, and his apartment.</div>
+    </div>
+
+    <div class="cast-card">
+      <span class="cast-role-badge">Series Regular</span>
+      <div class="cast-name">Kenny Lawrence</div>
+      <div class="cast-meta">36 · Executive Commissioner · Rajiv's Boss</div>
+      <div class="cast-bio">Short, dumb, lucky, and decorated in the letters of Delta Upsilon Mu. Kenny runs office moves like a casino floor, with dice sticks and figurines, and decides who gets a window by who came to his voluntary breakfasts. When he needed a system for judging people, his fraternity brothers sent him one: <em>Amazing Hazing: Tips for Deciding Who Belongs</em>.</div>
+    </div>
+
+    <div class="cast-card">
+      <span class="cast-role-badge">Recurring</span>
+      <div class="cast-name">Uncle Sam</div>
+      <div class="cast-meta">241 · Lives in Rajiv's Head</div>
+      <div class="cast-bio">Tall, white hair, striped pants, top hat. Only Rajiv can see him. He pees loudly at the next urinal, smokes a joint in the hallway, sits in other people's chairs and laughs. He's heard all the talk about draining swamps and reinventing government, and he is not about to let some consultant ruin a good thing. He just wants Rajiv to relax, cash the check, and accept.</div>
+    </div>
+
+    <div class="cast-card">
+      <span class="cast-role-badge">Recurring</span>
+      <div class="cast-name">Brett Keys</div>
+      <div class="cast-meta">43 · The Agency Whisperer</div>
+      <div class="cast-bio">Found in the men's room, the gym, or the Metro, never in an office. Nobody knows where his office is. Brett knows everything that's happening in the building and tells Rajiv all of it, usually at the urinal. He is not manipulative, just informative, which makes him a puppeteer's dream.</div>
+    </div>
+
+    <div class="cast-card">
+      <span class="cast-role-badge">Recurring</span>
+      <div class="cast-name">Glen Forager</div>
+      <div class="cast-meta">63 · Assistant Commissioner</div>
+      <div class="cast-bio">A jocular ex-consultant recruited during a brief era of "good government," then demoted when it ended. Glen wanders the building in a cheerful daze sustained by whiskey and thoughts of retirement. He lost his secretary in the last Move and is trying to give her to Rajiv. Her title is Typist. She cannot type.</div>
+    </div>
+
+    <div class="cast-card">
+      <span class="cast-role-badge">Recurring</span>
+      <div class="cast-name">Diana Jones</div>
+      <div class="cast-meta">47 · Admin Assistant</div>
+      <div class="cast-bio">Surrounded by photos of her grandchildren and a collection of tiny stuffed animals. Diana will help you when she's in the mood. Ask for recycled office supplies and she will remind you that this ain't Whole Foods. Try to order them online and she will explain, loudly, that she is not losing her job for your ass.</div>
+    </div>
+
+    <div class="cast-card">
+      <span class="cast-role-badge">Recurring</span>
+      <div class="cast-name">Mike</div>
+      <div class="cast-meta">52 · Kenny's Deputy</div>
+      <div class="cast-bio">Strokes his goatee, agrees with Kenny, and finishes Kenny's sentences with whatever Kenny wants to hear. When Kenny asks "What do I do, Mike?" Mike strokes his goatee. He is the one who moves the figurines and draws the red X's on the org chart.</div>
+    </div>
+
+    <div class="cast-card">
+      <span class="cast-role-badge">Recurring</span>
+      <div class="cast-name">Commissioner Franco Terra</div>
+      <div class="cast-meta">44 · Head of the Agency</div>
+      <div class="cast-bio">Bald, 5'4", and the reason everyone is afraid. Franco uses office moves to reward and punish, and Kenny is his eager instrument. He has left a trail of wounded people who promoted him because it was safer than the alternative. He hasn't met Rajiv yet. Kenny is terrified of what happens when he does.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- THE WORLD -->
+<section class="shows-section" id="world">
+  <div class="section-label">The Agency</div>
+  <h2 class="section-title">How Things Work</h2>
+
+  <div class="shows-grid">
+    <div class="show-card">
+      <span class="show-card-tag">Twice a Year</span>
+      <div class="show-card-title">The Move</div>
+      <div class="show-card-body">A semi-annual office shuffle used to reward and punish. Boxes get lost. So do people's boxes on the org chart. Directors steal floor plans from the conference room, study The Art of War, and fight for window offices with casino dice sticks.</div>
+    </div>
+    <div class="show-card">
+      <span class="show-card-tag">Security</span>
+      <div class="show-card-title">The Badge Office</div>
+      <div class="show-card-body">Your ID can expire after one week. To replace it you need an escort to the Badge Office. To get an escort someone has to answer the phone. Nobody answers on Fridays. The Badge Office is also closed on Fridays. You can go home.</div>
+    </div>
+    <div class="show-card">
+      <span class="show-card-tag">Labor</span>
+      <div class="show-card-title">The Union</div>
+      <div class="show-card-body">Set up your own computer over the weekend and three men will visit your office to see if you need "assistance." One of them will toss your African statuette in the air. You cost them overtime. There is not enough toilet paper in the world for Uncle Sam's bullshit.</div>
+    </div>
+  </div>
+</section>
+
+<!-- EPISODES -->
+<section class="episodes-section" id="episodes">
+  <div class="section-label">Season One</div>
+  <h2 class="section-title">Episode Guide</h2>
+
+  <div class="ep-list">
+
+    <div class="ep-item">
+      <div class="ep-num">01</div>
+      <div class="ep-title-block">
+        <div class="ep-title">Movin' on Up (Pilot)</div>
+        <div class="ep-tag">Written &amp; Available</div>
+      </div>
+      <div class="ep-desc">Rajiv's badge expires after one week and the Badge Office is closed because it's Friday. Weeks later, the Agency is in the grip of The Move, and everyone wants him to fight for his box on the org chart. He'd rather finish his Strategic Plan. Then Kenny turns the conference room into a war room, hands the two new Directors casino dice sticks, and tells them to earn the good space. Rajiv wins. Mark leaves in a sling. Rajiv's staff hail him as a hero, the union sends three goons because he plugged in his own computer, and Uncle Sam runs out of toilet paper.</div>
+    </div>
+
+    <div class="ep-item">
+      <div class="ep-num">02</div>
+      <div class="ep-title-block">
+        <div class="ep-title">Meetings of the Mind</div>
+        <div class="ep-tag">Developed</div>
+      </div>
+      <div class="ep-desc">Kenny scolds Rajiv for missing his staff-meeting quota. Rajiv announces weekly working lunches, which sparks a #resistRajiv campaign led by Dave and Aaron. Darcy's lobbyist meeting turns out to be a handsome Greek-American her mother hired. Monique stays neutral; she needs Rajiv's signature for the Vegas conference.</div>
+    </div>
+
+    <div class="ep-item">
+      <div class="ep-num">03</div>
+      <div class="ep-title-block">
+        <div class="ep-title">Off to See the Wizard</div>
+        <div class="ep-tag">Developed</div>
+      </div>
+      <div class="ep-desc">Rajiv's first meeting with Commissioner Franco. Kenny is a wreck because Rajiv isn't scared enough and might get them both killed, so he shares his best ass-kissing tips. Rajiv is calm and eager to present the Strategic Plan. Darcy and Monique go looking for Calvin, the only man who might talk sense into Rajiv, at every high-end lunch spot near the building.</div>
+    </div>
+
+    <div class="ep-item">
+      <div class="ep-num">04</div>
+      <div class="ep-title-block">
+        <div class="ep-title">Personhell Issues</div>
+        <div class="ep-tag">Developed</div>
+      </div>
+      <div class="ep-desc">The President kills the commuting subsidy and thousands of feds, including most of Rajiv's staff, stop showing up. Rajiv is legally required to check on every one of them, so he and Darcy make awkward home visits. Kenny scratches Franco's car and blames Glen. Over ouzo, Rajiv finally tells Darcy what happened in the Franco meeting.</div>
+    </div>
+
+    <div class="ep-item">
+      <div class="ep-num">05</div>
+      <div class="ep-title-block">
+        <div class="ep-title">Learning Las Vegas</div>
+        <div class="ep-tag">Developed</div>
+      </div>
+      <div class="ep-desc">The Vegas conference is two weeks out. To book a flight Rajiv must first complete a four-hour course on the government credit card and an eight-hour course on the travel software. Monique works her charms to get on the trip; Earth, Wind & Fire will be in town. Kenny fights to raise the conference drink limit.</div>
+    </div>
+
+    <div class="ep-item">
+      <div class="ep-num">06</div>
+      <div class="ep-title-block">
+        <div class="ep-title">Wages of Sin</div>
+        <div class="ep-tag">Developed</div>
+      </div>
+      <div class="ep-desc">Vegas. Darcy tries to work and is undone by 1 p.m. happy hours. Rajiv writes his speech poolside, surrounded by interns, alcohol, and Kenny. Calvin humiliates Franco during a character-building exercise. Glen is roasted by a motivational speaker and then by the sun. Monique wakes up on the Earth, Wind & Fire tour bus somewhere near Phoenix.</div>
+    </div>
+
+    <div class="ep-item">
+      <div class="ep-num">07</div>
+      <div class="ep-title-block">
+        <div class="ep-title">Hanging On</div>
+        <div class="ep-tag">Developed</div>
+      </div>
+      <div class="ep-desc">Glen prepares gleefully for retirement until HR gives him 24 hours to fix a 92-page form or stay another five years. Kenny orders Darcy and Monique to collect for a retirement party and they learn how few people know who Glen is. Rajiv, desperate not to inherit Maureen the Typist, pitches her to every other Director in the building.</div>
+    </div>
+
+    <div class="ep-item">
+      <div class="ep-num">08</div>
+      <div class="ep-title-block">
+        <div class="ep-title">The H-Aargh! Department</div>
+        <div class="ep-tag">Developed</div>
+      </div>
+      <div class="ep-desc">Rajiv's budget is approved and Franco even grants him more staff. Rajiv makes the rookie mistake of asking HR for help hiring. Dave is summoned to HR to verify his engineering degree and suspects Monique ratted him out.</div>
+    </div>
+
+    <div class="ep-item">
+      <div class="ep-num">09</div>
+      <div class="ep-title-block">
+        <div class="ep-title">Good Grief</div>
+        <div class="ep-tag">Developed</div>
+      </div>
+      <div class="ep-desc">Rajiv takes Calvin's advice and buys Dave and Aaron a beer to smooth things over. Monique returns from tour to find every plant in her cubicle dead. She suspects foul play. Dave eagerly volunteers to help investigate.</div>
+    </div>
+
+    <div class="ep-item">
+      <div class="ep-num">10</div>
+      <div class="ep-title-block">
+        <div class="ep-title">Dave's Day</div>
+        <div class="ep-tag">Developed</div>
+      </div>
+      <div class="ep-desc">Dave has another great idea and shares it with everyone who will listen, and everyone who won't. Darcy nearly deletes her dating profile until Dave stops by. Kenny nearly breaks his ping-pong record until Dave arrives. Rajiv and Calvin are locked out of the building after a long lunch and the guard is suspicious. Then Dave arrives.</div>
+    </div>
+
+    <div class="ep-item">
+      <div class="ep-num">11</div>
+      <div class="ep-title-block">
+        <div class="ep-title">Capitol Hillism</div>
+        <div class="ep-tag">Developed</div>
+      </div>
+      <div class="ep-desc">A Vegas scandal rocks the Agency. Rajiv faces an ethics panel for unlawfully saving the government money by booking on Expedia. Kenny and Franco prep Congressional testimony about the kegs, the interns, the strippers, the limos, the clowns, and the T-shirts. A photo of Darcy and Rajiv poolside runs in the Washington Post; they're clothed, but no one else is. Monique receives a restraining order from Earth, Wind & Fire.</div>
+    </div>
+
+    <div class="ep-item">
+      <div class="ep-num">12</div>
+      <div class="ep-title-block">
+        <div class="ep-title">The Walking Fed</div>
+        <div class="ep-tag">Developed</div>
+      </div>
+      <div class="ep-desc">Halloween, an unofficial Leave Early day. Rajiv, Darcy, and Monique work into the afternoon and are ambushed by an army of federal zombies oozing red tape. Kenny tries to find out whether he's the only one invited to Franco's midnight canoe trip on the Potomac.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CREATOR -->
+<section class="creator-section" id="creator">
+  <div class="creator-inner">
+    <div>
+      <div class="section-label">The Writer</div>
+      <div class="creator-monogram"><span>RC</span></div>
+      <div class="creator-name">Raheem Cash</div>
+      <div class="creator-role">Writer · Creator</div>
+    </div>
+    <div>
+      <div class="creator-body">
+        <p><em>That Government Smell</em> began as a self-published satirical novella of the same name, drawn from Raheem's own years inside federal agencies as a consultant and employee. The pilot and season arc were developed from that book.</p>
+        <p>Raheem writes workplace comedies about public institutions: the people who show up because they believe in the mission, and the systems that make believing so hard. His other pilot, <em>PB&amp;J</em>, is set inside a public broadcasting station and has been recognized by four competitions in 2025 and 2026.</p>
+        <p>He is seeking representation and production partners for smart, character-driven half-hour comedy.</p>
+      </div>
+      <div class="contact-block" id="contact">
+        <div class="contact-label">Get in Touch</div>
+        <div class="contact-item">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4h12v8H2V4z" stroke="#1f3a5f" stroke-width="1.2"/><path d="M2 4l6 5 6-5" stroke="#1f3a5f" stroke-width="1.2"/></svg>
+          <a href="mailto:raheem.cash@gmail.com">raheem.cash@gmail.com</a>
+        </div>
+        <div class="contact-item">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 2C3 5 3 7 5 9s4 2 7 1" stroke="#1f3a5f" stroke-width="1.2" stroke-linecap="round"/><path d="M5 9c.5 1.5 1.5 3.5 3 4.5" stroke="#1f3a5f" stroke-width="1.2" stroke-linecap="round"/></svg>
+          703-772-2103
+        </div>
+        <div class="contact-item">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2C5 2 3 4 3 7c0 4 5 7 5 7s5-3 5-7c0-3-2-5-5-5z" stroke="#1f3a5f" stroke-width="1.2"/><circle cx="8" cy="7" r="1.5" stroke="#1f3a5f" stroke-width="1"/></svg>
+          Alexandria, VA
+        </div>
+        <div class="contact-item" style="margin-top:14px;">
+          <a href="https://raheemcash.github.io/pbj/">See also: PB&amp;J, a half-hour sitcom</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-kicker">Ready to Read</div>
+  <h2 class="cta-headline">Pilot written. <em>Season mapped.</em></h2>
+  <p class="cta-sub"><em>That Government Smell</em> has a complete pilot script ("Movin' on Up"), a twelve-episode season arc, and a source novella. It is written, developed, and waiting.</p>
+  <div class="cta-buttons">
+    <a href="mailto:raheem.cash@gmail.com?subject=That%20Government%20Smell%20Inquiry" class="btn-primary">Request Materials</a>
+    <a href="mailto:raheem.cash@gmail.com?subject=That%20Government%20Smell%20Meeting%20Request" class="btn-secondary">Schedule a Meeting</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">TGS</div>
+  <div class="footer-copy">&copy; 2026 Raheem Cash &nbsp;·&nbsp; All rights reserved &nbsp;·&nbsp; The Agency is fictional. Its purpose is unclear.</div>
+</footer>
+
+<script>
+  // Subtle scroll-triggered fade for cards
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.cast-card, .show-card, .ep-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
